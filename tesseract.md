@@ -31,6 +31,7 @@ make install
 make check   # verify compilation
 ```
 
+### make error message
 
 ```
 In file included from src/viewer/svmnode.cpp:35:
