@@ -47,6 +47,8 @@ import cv2
 img = cv2.imread('image.jpg')
 
 d = pytesseract.image_to_data(img, output_type=Output.DICT)
+#ocr_result = pytesseract.image_to_string(Image.open('image.tif'), lang='eng')
+
 n_boxes = len(d['level'])
 for i in range(n_boxes):
     (x, y, w, h) = (d['left'][i], d['top'][i], d['width'][i], d['height'][i])
@@ -54,6 +56,30 @@ for i in range(n_boxes):
 
 cv2.imshow('img', img)
 cv2.waitKey(0)
+```
+##### Alphanumeric codes ( still not satisfactory)
+https://groups.google.com/g/tesseract-ocr/c/Hr79AmtApeA
+
+```
+tesseract = new Tesseract();                      
+tesseract.setOcrEngineMode(TessAPI.TessOcrEngineMode.OEM_TESSERACT_ONLY);
+tesseract.setPageSegMode(7);
+tesseract.setTessVariable("load_system_dawg", "0");
+tesseract.setTessVariable("load_freq_dawg", "0");
+tesseract.setTessVariable("load_punc_dawg", "0");
+tesseract.setTessVariable("load_number_dawg", "0");
+tesseract.setTessVariable("load_unambig_dawg", "0");
+tesseract.setTessVariable("load_bigram_dawg", "0");
+tesseract.setTessVariable("load_fixed_length_dawgs", "0");
+
+tesseract.setTessVariable("classify_enable_learning", "0");
+tesseract.setTessVariable("classify_enable_adaptive_matcher", "0");
+
+tesseract.setTessVariable("segment_penalty_garbage", "0");
+tesseract.setTessVariable("segment_penalty_dict_nonword", "0");
+tesseract.setTessVariable("segment_penalty_dict_frequent_word", "0");
+tesseract.setTessVariable("segment_penalty_dict_case_ok", "0");
+tesseract.setTessVariable("segment_penalty_dict_case_bad", "0");
 ```
 
 
@@ -145,4 +171,35 @@ make: *** [Makefile:8198: all-recursive] Error 1
    https://linuxhint.com/install-tesseract-ocr-linux/
    
    https://linuxhint.com/install_tesseract_ocr_linux/
+   
+   https://developer.apple.com/documentation/vision/recognizing_text_in_images
+   
+   https://stackoverflow.com/questions/37745519/use-pytesseract-ocr-to-recognize-text-from-an-image. ( 2nd solution to recognize codes with --psm option?)
+   
+   https://pyimagesearch.com/2021/11/15/tesseract-page-segmentation-modes-psms-explained-how-to-improve-your-ocr-accuracy/
+   
+   Boxes around charactors
+   
+   https://nanonets.com/blog/ocr-with-tesseract/
+   
+   Set installed tesseract path for pytesseract and use --psm 6
+   
+   https://www.analyticsvidhya.com/blog/2021/12/optical-character-recognition-using-pytesseract/
+   
+   pytesseract.pytesseract.tesseract_cmd = r'C:Program FilesTesseract-OCRtesseract.exe'
+   
+   https://stackoverflow.com/questions/64286102/how-to-set-pytesseract-to-solve-captcha-alphanumeric-and-5-length
+   
+   Solves basic alpha numeric captchas using pytesseract and PIL
+
+   https://gist.github.com/gauravssnl/f0425100713fd424592f16e61dafd74b
+   
+   
+# Ideas
+
+  Use italian language for english text?
+  
+   
+   
+
 
