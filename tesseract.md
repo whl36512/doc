@@ -21,6 +21,41 @@ dnf install tesseract
 # dnf install tesseract-langpack-eng. # no need for this. eng is already installed
 ```
 
+# Use
+```
+tesseract capture.png output -l eng+fra
+```
+##### Output to searchable PDF
+```
+tesseract capture.png output -l eng pdf
+```
+##### Extracting Text from a Multi-page PDF File
+```
+pdftoppm -png file.pdf output
+```
+##### Combine PDF files
+```
+pdfunite *.pdf joined.pdf
+```
+##### Bounding box
+
+  https://stackoverflow.com/questions/20831612/getting-the-bounding-box-of-the-recognized-words-using-python-tesseract
+```
+import pytesseract
+from pytesseract import Output
+import cv2
+img = cv2.imread('image.jpg')
+
+d = pytesseract.image_to_data(img, output_type=Output.DICT)
+n_boxes = len(d['level'])
+for i in range(n_boxes):
+    (x, y, w, h) = (d['left'][i], d['top'][i], d['width'][i], d['height'][i])
+    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+cv2.imshow('img', img)
+cv2.waitKey(0)
+```
+
 
 
 # Compile Tesseract and Leptonica in Rocky Linux 8
@@ -108,4 +143,6 @@ make: *** [Makefile:8198: all-recursive] Error 1
 # Pointers
 ## Installing and basic use
    https://linuxhint.com/install-tesseract-ocr-linux/
+   
+   https://linuxhint.com/install_tesseract_ocr_linux/
 
