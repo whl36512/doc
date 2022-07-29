@@ -28,17 +28,12 @@ conda install -c conda-forge pytesseract
 tesseract capture.png output -l eng+fra
 ```
 ##### Output to searchable PDF
-```
-tesseract capture.png output -l eng pdf
-```
+    tesseract capture.png output -l eng pdf
 ##### Extracting Text from a Multi-page PDF File
-```
-pdftoppm -png file.pdf output
-```
+    pdftoppm -png file.pdf output
 ##### Combine PDF files
-```
-pdfunite *.pdf joined.pdf
-```
+    pdfunite *.pdf joined.pdf
+
 ##### Bounding box
 
   https://stackoverflow.com/questions/20831612/getting-the-bounding-box-of-the-recognized-words-using-python-tesseract
@@ -180,29 +175,31 @@ make: *** [Makefile:8198: all-recursive] Error 1
    
    https://pyimagesearch.com/2021/11/15/tesseract-page-segmentation-modes-psms-explained-how-to-improve-your-ocr-accuracy/
    
-   Boxes around charactors
+##### Bounding Box OpenCV
    
-   https://nanonets.com/blog/ocr-with-tesseract/
+    https://nanonets.com/blog/ocr-with-tesseract/
    
-   Set installed tesseract path for pytesseract and use --psm 6
+##### Set installed tesseract path for pytesseract and use --psm 6
+https://www.analyticsvidhya.com/blog/2021/12/optical-character-recognition-using-pytesseract/
+    
+    pytesseract.pytesseract.tesseract_cmd = r'C:Program FilesTesseract-OCRtesseract.exe'
    
-   https://www.analyticsvidhya.com/blog/2021/12/optical-character-recognition-using-pytesseract/
+https://stackoverflow.com/questions/64286102/how-to-set-pytesseract-to-solve-captcha-alphanumeric-and-5-length
    
-   pytesseract.pytesseract.tesseract_cmd = r'C:Program FilesTesseract-OCRtesseract.exe'
-   
-   https://stackoverflow.com/questions/64286102/how-to-set-pytesseract-to-solve-captcha-alphanumeric-and-5-length
-   
-   Solves basic alpha numeric captchas using pytesseract and PIL
+##### Solves basic alpha numeric captchas using pytesseract and PIL
 
    https://gist.github.com/gauravssnl/f0425100713fd424592f16e61dafd74b
    
-   Levinshtein distance, generating test images
+##### Levinshtein distance, generating test images
    
    https://francescopochetti.com/easyocr-vs-tesseract-vs-amazon-textract-an-ocr-engine-comparison/
    
    https://betterprogramming.pub/beginners-guide-to-tesseract-ocr-using-python-10ecbb426c3d
    
    https://tesseract-ocr.github.io/tessdoc/FAQ.html
+   
+##### Ignore dictionary
+https://stackoverflow.com/questions/33005215/disable-dictionary-assisted-ocr-in-tesseract-c-api?rq=1
    
    
 # Ideas
@@ -213,19 +210,16 @@ make: *** [Makefile:8198: all-recursive] Error 1
   
   -lsm 6
   
-  I have combined LSTM and legacy together. Using combine_tessdata command.
-  
-  --oem 0 # engine (or 1 or 2 or 3).   
-  
-  tesseract multiLanguageText.png output hocr.  # hOCR output file
-  
-  tesseract --print-parameters
-  
-  From version 8.4.0 on, qpdf has the options --overlay/--underlay for easy merging of image-only and text PDFs. E.g.,
+I have combined LSTM and legacy together. Using combine_tessdata command.
 
-```
-$ qpdf image.pdf --underlay text.pdf -- image_txt.pdf
-```  
+    --oem 0 # engine (or 1 or 2 or 3).   
+    tesseract multiLanguageText.png output hocr.  # hOCR output file
+    tesseract --print-parameters
+  
+From version 8.4.0 on, qpdf has the options --overlay/--underlay for easy merging of image-only and text PDFs. E.g.,
+
+    qpdf image.pdf --underlay text.pdf -- image_txt.pdf
+  
   
 > You can call hocrtransform from the command line and give it the image you wish to use. ocrmypdf would normally use the filename 000001.image as the image.
 >```
@@ -237,10 +231,27 @@ $ qpdf image.pdf --underlay text.pdf -- image_txt.pdf
 > ```
 > original.pdf should be the original PDF, IIRC, from which it will gather overall document information. If you need outputfile to be a PDF/A you could write a script to invoke ocrmypdf.generate_pdfa for you.
 
+##### Merge (concat) PDF files
 > Add a cover.pdf page to book.pdf
 > ```
 > qpdf book.pdf --pages cover.pdf 1 book.pdf 1-z -- result.pdf  
 > ```
    
+> Considering that pdfunite is part of poppler it has a higher chance to be installed, usage is also simpler than pdftk:
+> ```
+> pdfunite in-1.pdf in-2.pdf in-n.pdf out.pdf
+> ```
 
+> You can simply run the following command to create both pdf and hocr at the same time.
+> ```
+> tesseract input.tif out pdf hocr 
+> ```
+
+##### Create ALTO file
+```
+tesseract image-file       output-filename      -l eng      alto
+```
+##### Parameter Configuration 
+    /usr/share/tesseract/5/tessdata/configs/
+    
 
