@@ -227,8 +227,17 @@ make: *** [Makefile:8198: all-recursive] Error 1
 $ qpdf image.pdf --underlay text.pdf -- image_txt.pdf
 ```  
   
-  
-   
+> You can call hocrtransform from the command line and give it the image you wish to use. ocrmypdf would normally use the filename 000001.image as the image.
+>```
+> python3 -m ocrmypdf.hocrtransform --image 000001.image 000001.hocr manual_000001.pdf
+> ```
+>  You can use qpdf to combine the single page PDFs into a PDF.
+> ```
+> qpdf original.pdf --pages manual_*.pdf -- outputfile.pdf
+> ```
+> original.pdf should be the original PDF, IIRC, from which it will gather overall document information. If you need outputfile to be a PDF/A you could write a script to invoke ocrmypdf.generate_pdfa for you.
+
+
    
 
 
