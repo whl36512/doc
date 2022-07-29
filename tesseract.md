@@ -19,6 +19,8 @@ dnf config-manager --add-repo https://download.opensuse.org/repositories/home:/A
 rpm --import https://build.opensuse.org/projects/home:Alexander_Pozdnyakov/public_key
 dnf install tesseract
 # dnf install tesseract-langpack-eng. # no need for this. eng is already installed
+yum install tesseract-script-latn.noarch
+conda install -c conda-forge pytesseract
 ```
 
 # Use
@@ -194,10 +196,37 @@ make: *** [Makefile:8198: all-recursive] Error 1
 
    https://gist.github.com/gauravssnl/f0425100713fd424592f16e61dafd74b
    
+   Levinshtein distance, generating test images
+   
+   https://francescopochetti.com/easyocr-vs-tesseract-vs-amazon-textract-an-ocr-engine-comparison/
+   
+   https://betterprogramming.pub/beginners-guide-to-tesseract-ocr-using-python-10ecbb426c3d
+   
+   https://tesseract-ocr.github.io/tessdoc/FAQ.html
+   
    
 # Ideas
 
-  Use italian language for english text?
+  Use italian language for english text
+  
+  Use -l script\Latin 
+  
+  -lsm 6
+  
+  I have combined LSTM and legacy together. Using combine_tessdata command.
+  
+  --oem 0 # engine (or 1 or 2 or 3).   
+  
+  tesseract multiLanguageText.png output hocr.  # hOCR output file
+  
+  tesseract --print-parameters
+  
+  From version 8.4.0 on, qpdf has the options --overlay/--underlay for easy merging of image-only and text PDFs. E.g.,
+
+```
+$ qpdf image.pdf --underlay text.pdf -- image_txt.pdf
+```  
+  
   
    
    
