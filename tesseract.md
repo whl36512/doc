@@ -1,3 +1,28 @@
+# Install on CentOS, SUSE, etc
+### Install 4.1.1
+```
+yum install -y tesseract
+```
+
+### Install 4.1.3
+https://tesseract-ocr.github.io/tessdoc/InstallationOpenSuse.html
+```  
+dnf config-manager --add-repo https://download.opensuse.org/repositories/home:/Alexander_Pozdnyakov/CentOS_8/
+rpm --import https://build.opensuse.org/projects/home:Alexander_Pozdnyakov/public_key
+dnf install tesseract
+dnf install tesseract-langpack-eng
+```
+### Install 5.1
+https://tesseract-ocr.github.io/tessdoc/InstallationOpenSuse.html
+```  
+dnf config-manager --add-repo https://download.opensuse.org/repositories/home:/Alexander_Pozdnyakov:/tesseract5/CentOS_8/
+rpm --import https://build.opensuse.org/projects/home:Alexander_Pozdnyakov/public_key
+dnf install tesseract
+# dnf install tesseract-langpack-eng. # no need for this. eng is already installed
+```
+
+
+
 # Compile Tesseract and Leptonica in Rocky Linux 8
 should also work with AlmaLinux 8 and Redhat 8
 
@@ -18,7 +43,7 @@ make check
 ```
 
 
-## Compile Tesseract ( not working)
+## Compile Tesseract 5 ( not working)
 
 
 ```shell
@@ -80,4 +105,7 @@ make[1]: Leaving directory '/root/tesseract'
 make: *** [Makefile:8198: all-recursive] Error 1
 ```
 
+# Pointers
+## Installing and basic use
+   https://linuxhint.com/install-tesseract-ocr-linux/
 
