@@ -237,7 +237,10 @@ $ qpdf image.pdf --underlay text.pdf -- image_txt.pdf
 > ```
 > original.pdf should be the original PDF, IIRC, from which it will gather overall document information. If you need outputfile to be a PDF/A you could write a script to invoke ocrmypdf.generate_pdfa for you.
 
-
+> Add a cover.pdf page to book.pdf
+> ```
+> qpdf book.pdf --pages cover.pdf 1 book.pdf 1-z -- result.pdf  
+> ```
    
 
 
